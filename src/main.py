@@ -1,5 +1,3 @@
-# main.py
-
 # Modules
 import pygame
 import math
@@ -128,3 +126,45 @@ def get_clicked_pos(pos, rows, width):
     col = x // gap
 
     return row, col
+
+
+def main(win, width):
+    ROWS = 50
+    grid = make_grid(ROWS, width)
+
+    start = None
+    end = None
+
+    run = True
+    started = False
+    while run:
+        draw(win, grid, ROWS, width)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            
+            if started:
+                continue
+
+            if pygame.mouse.get_pressed()[0]: # LEFT-CLICK
+                    pos = pygame.mouse.get_pos()
+                    row, col = get_clicked_pos(pos, ROWS, width)
+                    node = grid[row][col]
+
+                    if not start:
+                        start = node
+                        start.make_start()
+
+                    elif not end:
+                        end = node
+                        end.make_end()
+                    
+                    elif node != end and node != start:
+                        node.make_barrier()
+
+            elif pygame.mouse.get_pressed()[2]: # RIGHT-CLICK
+                pass
+    
+    pygame.quit()
+
+main(WIN, WIDTH)
