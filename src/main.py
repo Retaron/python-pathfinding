@@ -18,7 +18,7 @@ PURPLE = (128, 0, 128)
 ORANGE= (255, 165, 0)
 GREY = (128, 128, 128)
 TURQUOISE = (64, 224, 208)
-INTIGO = (70, 0 , 130)
+INDIGO = (70, 0 , 130)
 
 class Node:
     def __init__(self, row, col, width, total_rows):
